@@ -14,16 +14,16 @@ class VisionServiceProvider extends ServiceProvider
         // Temaların Blade bileşen yollarını kaydet
         $this->loadViewsFrom(path: __DIR__.'/../resources/views', namespace: 'visionary');
 
-        $this->registerLivewireComponents(prefix: 'visionary');
+        //$this->registerLivewireComponents(prefix: 'visionary');
 
         // Temaların konfigürasyon dosyasını yükle
-        $this->mergeConfigFrom(
+        /*$this->mergeConfigFrom(
             path: __DIR__.'/../../config/visionary.php', key: 'visionary',
-        );
+        );*/
 
-        $this->publishes([
+        /*$this->publishes([
             __DIR__.'/../../publishable/assets' => public_path('visionary'),
-        ], groups: 'public');
+        ], groups: 'public');*/
 
 //        Blade::componentNamespace('YellowThree\\Visionary\\Views\\Components', 'visionary');
 //        Blade::anonymousComponentPath(path: __DIR__.'/../../resources/views/components', prefix: 'visionary');
