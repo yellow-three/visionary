@@ -45,9 +45,9 @@ class VisionServiceProvider extends ServiceProvider
 
     public function register() : void
     {
-        $this->app->singleton('visionary', function () {
+        /*$this->app->singleton('visionary', function () {
             return new Visionary;
-        });
+        });*/
     }
 
     private function getConfigFile(): string
