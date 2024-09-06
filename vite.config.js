@@ -1,24 +1,42 @@
-import { defineConfig } from 'vite';
+import { defineConfig,loadEnv } from 'vite';
 import laravel from 'laravel-vite-plugin';
 import path from 'path';
 
-export default defineConfig({
-    /*plugins: [
-        laravel({
-            buildDirectory: 'bundle',
-            input: [
-                'resources/assets/js/app.js',
-                // 'resources/scss/styles.scss',
-            ],
-        }),
-    ],*/
-    resolve: {
-        alias: {
-            '@visionary': path.resolve(__dirname, 'resources'),
+export default defineConfig(({ mode }) =>{
+
+    const envDir = "../../../";
+
+    Object.assign(import.meta.env, loadEnv(mode, envDir));
+
+    return {
+        server: {
+            host: import.meta.env.VITE_HOST || "localhost",
+            port: import.meta.env.VITE_PORT || 5173,
         },
-    },
-    build: {
-        manifest: 'assets.json', // Customize the manifest filename...
-        outDir: path.resolve(__dirname, 'publishable'),
-    },
+        plugins: [
+            laravel({
+                hotFile: "frontend-visionary-vite.hot",
+                publicDirectory: "publishable",
+                buildDirectory: "build",
+                /*buildDirectory: "themes/frontend/visionary/build",*/
+                input: [
+                    'resources/assets/js/app.js',
+                    // 'resources/scss/styles.scss',
+                ],
+                refresh: true,
+            }),
+        ],
+        build: {
+            emptyOutDir: true,
+            /*outDir: path.resolve(__dirname, 'publishable/build'),*/
+        },
+
+        experimental: {
+            renderBuiltUrl(filename, { hostId, hostType, type }) {
+                if (hostType === "css") {
+                    return path.basename(filename);
+                }
+            },
+        },
+    }
 });

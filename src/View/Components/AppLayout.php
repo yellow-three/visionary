@@ -1,6 +1,6 @@
 <?php
 
-namespace App\View\Components;
+namespace YellowThree\Visionary\Components;
 
 use Illuminate\View\Component;
 use Illuminate\View\View;
@@ -12,8 +12,6 @@ class AppLayout extends Component
      */
     public function render(): View
     {
-        $theme = 'visionary';
-
-        return view("frontend.$theme.layouts.app");
+        return view("visionary::layouts.app");
     }
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\View\Components;
+namespace YellowThree\Visionary\Components;
 
 use Illuminate\View\Component;
 use Illuminate\View\View;

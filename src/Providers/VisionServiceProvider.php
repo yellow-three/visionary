@@ -3,9 +3,9 @@
 namespace YellowThree\Visionary\Providers;
 
 use Illuminate\Support\Facades\Blade;
+use Illuminate\Support\Facades\Vite;
 use Illuminate\Support\ServiceProvider;
 use Livewire\Livewire;
-use YellowThree\Visionary\Facades\Visionary;
 
 class VisionServiceProvider extends ServiceProvider
 {
@@ -14,19 +14,29 @@ class VisionServiceProvider extends ServiceProvider
         // Temaların Blade bileşen yollarını kaydet
         $this->loadViewsFrom(path: __DIR__.'/../../resources/views', namespace: 'visionary');
 
-        //$this->registerLivewireComponents(prefix: 'visionary');
+        $this->registerLivewireComponents(prefix: 'visionary');
 
         // Temaların konfigürasyon dosyasını yükle
-        /*$this->mergeConfigFrom(
+        $this->mergeConfigFrom(
             path: __DIR__.'/../../config/visionary.php', key: 'visionary',
-        );*/
+        );
 
-        /*$this->publishes([
-            __DIR__.'/../../publishable/assets' => public_path('visionary'),
-        ], groups: 'public');*/
+        $this->publishes([
+            __DIR__.'/../../publishable/' => public_path('themes/frontend/visionary'),
+        ], groups: 'public');
 
-//        Blade::componentNamespace('YellowThree\\Visionary\\Views\\Components', 'visionary');
-//        Blade::anonymousComponentPath(path: __DIR__.'/../../resources/views/components', prefix: 'visionary');
+        /* Paginator */
+        //        Paginator::defaultView('shop::partials.pagination');
+        //        Paginator::defaultSimpleView('shop::partials.pagination');
+
+        //        Blade::componentNamespace('YellowThree\\Visionary\\Views\\Components', 'visionary');
+        Blade::anonymousComponentPath(path: __DIR__.'/../../resources/views/components', prefix: 'visionary');
+
+        Blade::directive('viteYellowThree', function ($expression) {
+            $html = $this->setVite($expression)->toHtml();
+
+            return "<?php echo $html; ?>";
+        });
 
     }
 
@@ -43,7 +53,17 @@ class VisionServiceProvider extends ServiceProvider
         }
     }
 
-    public function register() : void
+    /**
+     * Set bagisto vite.
+     */
+    private function setVite(array $entryPoints): \Illuminate\Foundation\Vite
+    {
+        return Vite::useHotFile(config('visionary::vite.hot_file'))
+            ->useBuildDirectory(config('visionary::vite.build_directory'))
+            ->withEntryPoints($entryPoints);
+    }
+
+    public function register(): void
     {
         /*$this->app->singleton('visionary', function () {
             return new Visionary;
