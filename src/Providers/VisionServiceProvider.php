@@ -58,8 +58,7 @@ class VisionServiceProvider extends ServiceProvider
      */
     private function setVite(array $entryPoints): \Illuminate\Foundation\Vite
     {
-        return Vite::useHotFile(config('visionary::vite.hot_file'))
-            ->useBuildDirectory(config('visionary::vite.build_directory'))
+        return Vite::useBuildDirectory(config('visionary::vite.build_directory'))
             ->withEntryPoints($entryPoints);
     }
 

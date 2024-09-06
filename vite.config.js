@@ -4,15 +4,7 @@ import path from 'path';
 
 export default defineConfig(({ mode }) =>{
 
-    const envDir = "../../../";
-
-    Object.assign(import.meta.env, loadEnv(mode, envDir));
-
     return {
-        server: {
-            host: import.meta.env.VITE_HOST || "localhost",
-            port: import.meta.env.VITE_PORT || 5173,
-        },
         plugins: [
             laravel({
                 hotFile: "frontend-visionary-vite.hot",
@@ -29,14 +21,6 @@ export default defineConfig(({ mode }) =>{
         build: {
             emptyOutDir: true,
             /*outDir: path.resolve(__dirname, 'publishable/build'),*/
-        },
-
-        experimental: {
-            renderBuiltUrl(filename, { hostId, hostType, type }) {
-                if (hostType === "css") {
-                    return path.basename(filename);
-                }
-            },
         },
     }
 });
