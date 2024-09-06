@@ -10,7 +10,6 @@ class VisionServiceProvider extends ServiceProvider
 {
     public function boot(): void
     {
-        dd(0);
         // Temaların Blade bileşen yollarını kaydet
         $this->loadViewsFrom(path: __DIR__.'/../resources/views', namespace: 'visionary');
 
