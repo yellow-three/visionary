@@ -1,0 +1,40 @@
+{
+  "name": "yellow-three/visionary",
+  "type": "yt-extension",
+  "description": "YT Theme",
+  "keywords": [
+    "yt",
+    "framework",
+    "laravel",
+    "visionary",
+    "theme"
+  ],
+  "authors": [
+    {
+      "name": "Abdurrahman Harmankaya",
+      "email": "abdurrahman.kim@gmail.com"
+    }
+  ],
+  "require": {
+    "laravel/framework": "^11.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "YellowThree\\Visionary\\": "src/"
+    }
+  },
+  "extra": {
+    "laravel": {
+      "dont-discover": [],
+      "providers": [
+        "YellowThree\\Visionary\\Providers\\VisionServiceProvider"
+      ],
+      "aliases": {
+        "Visionary": "YellowThree\\Visionary\\Facade"
+      }
+    }
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true,
+  "license": "MIT"
+}
