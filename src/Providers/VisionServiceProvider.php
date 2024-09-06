@@ -14,7 +14,7 @@ class VisionServiceProvider extends ServiceProvider
         // Temaların Blade bileşen yollarını kaydet
         $this->loadViewsFrom(path: __DIR__.'/../resources/views', namespace: 'visionary');
 
-        $this->registerLivewireComponents(prefix: 'visionary');
+//        $this->registerLivewireComponents(prefix: 'visionary');
 
         // Temaların konfigürasyon dosyasını yükle
         $this->mergeConfigFrom(
