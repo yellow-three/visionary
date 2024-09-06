@@ -25,8 +25,8 @@ class VisionServiceProvider extends ServiceProvider
             __DIR__.'/../../publishable/assets' => public_path('visionary'),
         ], groups: 'public');
 
-        Blade::componentNamespace('YellowThree\\Visionary\\Views\\Components', 'visionary');
-        Blade::anonymousComponentPath(path: __DIR__.'/../../resources/views/components', prefix: 'visionary');
+//        Blade::componentNamespace('YellowThree\\Visionary\\Views\\Components', 'visionary');
+//        Blade::anonymousComponentPath(path: __DIR__.'/../../resources/views/components', prefix: 'visionary');
 
     }
 
