@@ -5,16 +5,16 @@ namespace YellowThree\Visionary\Providers;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
 use Livewire\Livewire;
+use YellowThree\Visionary\Facades\Visionary;
 
 class VisionServiceProvider extends ServiceProvider
 {
     public function boot(): void
     {
-        dd(0);
         // Temaların Blade bileşen yollarını kaydet
         $this->loadViewsFrom(path: __DIR__.'/../resources/views', namespace: 'visionary');
 
-        //$this->registerLivewireComponents(prefix: 'visionary');
+        $this->registerLivewireComponents(prefix: 'visionary');
 
         // Temaların konfigürasyon dosyasını yükle
         $this->mergeConfigFrom(
@@ -25,8 +25,8 @@ class VisionServiceProvider extends ServiceProvider
             __DIR__.'/../../publishable/assets' => public_path('visionary'),
         ], groups: 'public');
 
-        /*Blade::componentNamespace('YellowThree\\Visionary\\Views\\Components', 'visionary');
-        Blade::anonymousComponentPath(path: __DIR__.'/../../resources/views/components', prefix: 'visionary');*/
+        Blade::componentNamespace('YellowThree\\Visionary\\Views\\Components', 'visionary');
+        Blade::anonymousComponentPath(path: __DIR__.'/../../resources/views/components', prefix: 'visionary');
 
     }
 
@@ -45,9 +45,9 @@ class VisionServiceProvider extends ServiceProvider
 
     public function register() : void
     {
-        /*$this->app->singleton('visionary', function () {
+        $this->app->singleton('visionary', function () {
             return new Visionary;
-        });*/
+        });
     }
 
     private function getConfigFile(): string
